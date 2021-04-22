@@ -1,0 +1,24 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: switch
+  labels:
+    description: 'switch'
+    manufacturer: 'ai-demo'
+spec:
+  deviceModelRef:
+    name: switch-model
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: ''
+            operator: In
+            values:
+              - edge-node
+status:
+  twins:
+    - propertyName: state
+      desired:
+        metadata:
+          type: string
+        value: 'ON'

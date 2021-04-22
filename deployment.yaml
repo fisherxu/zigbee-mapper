@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee-mapper
+  labels:
+    app: zigbee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zigbee
+  template:
+    metadata:
+      labels:
+        app: zigbee
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        name: "edge-node"
+      containers:
+      - name: zigbee
+        image: kubeedge/zigbee-mapper:arm32
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
